@@ -67,8 +67,6 @@ def process_video(video_path, output_path, has_no_audio:bool, has_hfi:bool, ambi
     elif ambiguity == "Classic":
 
         bitrate = 1
-        bright = 0
-        saturation = 1
         lpf = 5000
 
     elif ambiguity == "Low":
@@ -103,6 +101,9 @@ def process_video(video_path, output_path, has_no_audio:bool, has_hfi:bool, ambi
     
     if not has_no_audio:
         if ambiguity == "Classic":
+
+            video_filters = "fps=30," + ("scale=trunc(iw/2)*2:trunc(ih/2)*2")
+
             ffmpeg_command = (
             ffmpeg
             .input(video_path)
@@ -180,7 +181,7 @@ def main():
     
 
     has_no_audio = st.checkbox("音声を除去する", False, help="音声を除去します。")
-    has_hfi = st.checkbox("Hearing from the INSIDE", True, help="こもった曖昧な音になります。")
+    has_hfi = st.checkbox("Hearing from the INSIDE", True, help="こもった曖昧な音になります。Classicモードでは無効です。")
     
     # ファイルがアップロードされていない場合はここで終了
     if len(files) == 0:
