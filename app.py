@@ -44,7 +44,9 @@ def get_video_duration(video_path):
                                     stderr=subprocess.STDOUT)
         # 出力から動画の長さ（秒）を取得
         duration = round(float(result.stdout), 1)
+        encode_duration = round((duration*0.4) / 60, 1)
         st.info(f"動画の長さ： {duration}秒")
+        st.info(f"処理にかかる時間： およそ{encode_duration}分")
         return duration
     except Exception as e:
         print(f"Error getting video duration: {e}")
