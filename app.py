@@ -53,66 +53,74 @@ def get_video_duration(video_path):
 
 
 def process_video(video_path, output_path, has_no_audio:bool, has_hfi:bool, ambiguity:str, show_logs:bool):
+    
     audio_bitrate_kbps = 0 if has_no_audio else 256
     duration = get_video_duration(video_path)
-    #bitrate = calculate_bitrate(target_size_mb, duration , audio_bitrate_kbps=audio_bitrate_kbps)
-
 
     if ambiguity == "Mid":
 
-        bitrate = 96
+        bitrate = 16
         bright = 0.4
-        saturation = 0.7
+        saturation = 0.5
         lpf = 300
+
+    elif ambiguity == "Classic":
+
+        bitrate = 1
+        bright = 0
+        saturation = 1
+        lpf = 5000
 
     elif ambiguity == "Low":
 
-        bitrate = 128
+        bitrate = 32
         bright = 0.3
-        saturation = 0.8
+        saturation = 0.6
         lpf = 500
 
     elif ambiguity == "High": 
 
-        bitrate = 48
-        bright = 0.4
-        saturation = 0.6
+        bitrate = 8
+        bright = 0.45
+        saturation = 0.4
         lpf = 220
 
     elif ambiguity == "Extreme": 
 
-        bitrate = 24
+        bitrate = 4
         bright = 0.5
-        saturation = 0.5
+        saturation = 0.4
         lpf = 170
 
     
     video_filters = ("fps=30," + ("scale=trunc(iw/2)*2:trunc(ih/2)*2") + 
-                    f",eq=brightness={bright}:saturation={saturation}:contrast=0.5"
-                    #f"gblur=sigma=0.5:steps=1:planes=15:sigmaV=-1"
+                    f",eq=brightness={bright}:saturation={saturation}:contrast=0.5" +
+                    f",gblur=sigma=1:steps=2:planes=15:sigmaV=-1"
                     )
-    audio_filters = f"highpass=f=30,lowpass=f={lpf}"
+    
 
+    audio_filters = f"highpass=f=30,lowpass=f={lpf}" if has_hfi else f"highpass=f=20,lowpass=f=18000"
     
     if not has_no_audio:
-        if has_hfi:
+        if ambiguity == "Classic":
             ffmpeg_command = (
-                ffmpeg
-                .input(video_path)
-                .output(output_path, vcodec='libx264', acodec='aac', audio_bitrate='256k', 
-                        video_bitrate=f'{bitrate}k', vf=video_filters, af=audio_filters)
-                .overwrite_output()
-                .compile()
+            ffmpeg
+            .input(video_path)
+            .output(output_path, vcodec='libx264', acodec='aac', audio_bitrate='256k', 
+                    video_bitrate=f'{bitrate}k', vf=video_filters, af=audio_filters)
+            .overwrite_output()
+            .compile()
             )
         else:
             ffmpeg_command = (
                 ffmpeg
                 .input(video_path)
                 .output(output_path, vcodec='libx264', acodec='aac', audio_bitrate='256k', 
-                        video_bitrate=f'{bitrate}k', vf=video_filters)
+                        crf=f'{bitrate}k', vf=video_filters, af=audio_filters)
                 .overwrite_output()
                 .compile()
             )
+
     else:
         ffmpeg_command = (
             ffmpeg
@@ -161,7 +169,7 @@ def main():
     with st.expander("あいまいさ設定（Ambiguity Adjustment）", expanded=False):
         if not is_devmode:
             ambiguity = st.radio(label="",
-                        options=("Low", "Mid", "High", "Extreme"), index=1, horizontal=True,
+                        options=("Classic", "Low", "Mid", "High", "Extreme"), index=2, horizontal=True,
                         )
         else:
             ambiguity = st.text_input("カスタム指定", value="")
