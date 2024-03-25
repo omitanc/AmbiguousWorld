@@ -42,6 +42,9 @@ streamlit run app.py
 - [FFmpeg Codecs Documentation](https://ffmpeg.org/ffmpeg-codecs.html#libx264_002c-libx264rgb)
 - [Python, OpenCVで画像ファイルの読み込み、保存](https://note.nkmk.me/python-opencv-imread-imwrite/)
 - [Streamlitのレイアウトとコンテナを見てみよう](https://welovepython.net/streamlit-layout-container/#toc4)
+- [【ffmpeg】ffmpegコマンドの備忘録(タイムラプス、切り抜き、アニメGIF、ビットレート指定、コーデック、音消し、手振れ補正、明るさ）](https://qiita.com/riversun/items/6ff25fe8620457342a5e)
+- [非エンジニアが音響知識だけでffmpegのコードサンプル作ってみた](https://tech-blog.voicy.jp/entry/2021/12/07/130000)
+- [FFmpegで動画と画像をブレンド合成して透過する](https://askthewind.hatenablog.com/entry/2018/12/22/140629)
 
 <br>
 
