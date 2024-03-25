@@ -1,6 +1,6 @@
 # AmbiguousWorld
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blueberry.streamlit.app/)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ambiguousworld.streamlit.app/)
 
 <br>
 
@@ -45,7 +45,7 @@ streamlit run app.py
 - [【ffmpeg】ffmpegコマンドの備忘録(タイムラプス、切り抜き、アニメGIF、ビットレート指定、コーデック、音消し、手振れ補正、明るさ）](https://qiita.com/riversun/items/6ff25fe8620457342a5e)
 - [非エンジニアが音響知識だけでffmpegのコードサンプル作ってみた](https://tech-blog.voicy.jp/entry/2021/12/07/130000)
 - [FFmpegで動画と画像をブレンド合成して透過する](https://askthewind.hatenablog.com/entry/2018/12/22/140629)
-- [最新ffmpegのオプションまとめ]（http://mobilehackerz.jp/archive/wiki/index.php?%BA%C7%BF%B7ffmpeg%A4%CE%A5%AA%A5%D7%A5%B7%A5%E7%A5%F3%A4%DE%A4%C8%A4%E1）
+- [最新ffmpegのオプションまとめ](http://mobilehackerz.jp/archive/wiki/index.php?%BA%C7%BF%B7ffmpeg%A4%CE%A5%AA%A5%D7%A5%B7%A5%E7%A5%F3%A4%DE%A4%C8%A4%E1)
 - [ffmpeg-ptyhonでガウシアンフィルタを使用して動画をぼかす](https://serverarekore.blogspot.com/2021/09/ffmpeg-ptyhon_45.html)
 
 <br>
