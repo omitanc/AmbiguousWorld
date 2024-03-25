@@ -67,6 +67,8 @@ def process_video(video_path, output_path, has_no_audio:bool, has_hfi:bool, ambi
     elif ambiguity == "Classic":
 
         bitrate = 1
+        bright = 0
+        saturation = 1
         lpf = 5000
 
     elif ambiguity == "Low":
